@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Taller Node.JS</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<section data-markdown >
+				    <script type="text/template">
+				        ## Taller [Node.JS](https://nodejs.org/es/)
+
+								<img data-src="images/logo.png" width="400">
+
+								Por: J. Carlos Huarachi
+				    </script>
+				</section>
+
+				<section data-markdown>
+				    <script type="text/template">
+				        ## Instalación de [Node.js](https://nodejs.org/es/) y [NPM](https://www.npmjs.com/)
+								GNU/Linux
+								Instalar nvm
+								```sh
+								curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.0/install.sh | bash
+								```
+								Instalar node v6.7.0 y npm 3.10.3
+								```sh
+								nvm install v6.7.0
+								```
+								Windows: [https://nodejs.org/dist/v6.7.0/node-v6.7.0-x86.msi](-https://nodejs.org/dist/v6.7.0/node-v6.7.0-x86.msi)
+								MacOS: [https://nodejs.org/dist/v6.7.0/node-v6.7.0.pkg](https://nodejs.org/dist/v6.7.0/node-v6.7.0.pkg)
+
+				    </script>
+				</section>
+				<!-- Instalación -->
+				<section>
+					Ejemplo de servidor simple
+						<pre>
+							<code data-trim data-noescape>
+'use strict';
+const servidor = require('http');
+var util = require('util');
+function funcionIniciarServidor(request, response) {
+  console.log(util.format('Petición método [%s] y URL [%s]',
+		request.method, request.url));
+  response.writeHead(200, {'Content-Type': 'text/html'});
+  response.write('Bienvenido a Node.JS');
+	response.end();
+}
+
+const puerto = 8800;
+var server = servidor.createServer(funcionIniciarServidor)
+.listen(puerto,
+() => console.log(`Servidor activo en el puerto: ${puerto}`));
+					    </code>
+						</pre>
+				</section>
+
+				<section data-markdown>
+				    <script type="text/template">
+				        # Framework [EXPRESS](http://expressjs.com/es/)
+								Instalación
+								```sh
+								npm install express --save
+								```
+				    </script>
+				</section>
+
+				<section data-markdown>
+						<script type="text/template">
+								# [Express - Generator](http://expressjs.com/es/starter/generator.html)
+								Instalación en modo global
+								```sh
+								npm install express-generator -g
+								```
+
+								Creación de proyecto base
+								```sh
+								express myProyecto
+								```
+						</script>
+				</section>
+
+				<section data-markdown>
+						<script type="text/template">
+								# Base de datos - [Sequelize](http://docs.sequelizejs.com/en/v3/)
+								Instalar dependencias para trabajar con Postgres y el ORM
+								```sh
+								npm install --save pg pg-hstore
+								npm install --save sequelize
+								```
+
+								Instalación de linea de comandos Sequelize
+								```sh
+								npm install -g sequelize-cli
+								```
+
+								Iniciar estructura para utilizar sequelize
+								```sh
+								sequelize init
+								```
+
+								Creación de entidad utilizando migraciones
+								```sh
+								sequelize model:create --name tarjeta --attributes "texto_referencia:string,texto_memoria:string,imagen:string,grupo:string"
+								```
+
+						</script>
+				</section>
+
+				<section data-markdown>
+						<script type="text/template">
+								# Proyecto Memoria-Tarjetas
+
+								[Proyecto Backend](https://github.com/fujuca510/tarjetas-memoria-backend)
+
+								[Proyecto Frontend](https://github.com/fujuca510/tarjetas-memoria-frontend)
+
+						</script>
+				</section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
